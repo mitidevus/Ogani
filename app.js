@@ -1,5 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
+const exphbs = require("express-handlebars");
+const expressHandlebarsSections = require("express-handlebars-sections");
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -15,6 +17,14 @@ const contactRouter = require('./components/contact');
 const cartCheckoutRouter = require('./components/cartCheckout');
 
 const app = express();
+
+
+const hbs = exphbs.create({
+  helpers: {
+    format: (val) => numeral(val).format("0,0") + " đ",
+  },
+});
+expressHandlebarsSections(hbs);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
