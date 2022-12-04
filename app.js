@@ -19,13 +19,6 @@ const cartCheckoutRouter = require('./components/cartCheckout');
 const app = express();
 
 
-const hbs = exphbs.create({
-  helpers: {
-    format: (val) => numeral(val).format("0,0") + " đ",
-  },
-});
-expressHandlebarsSections(hbs);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

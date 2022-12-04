@@ -83,6 +83,10 @@ p {
 	margin: 0 0 15px 0;
 }
 
+.sp-qc{
+	font-weight: bold;
+}
+
 img {
 	max-width: 100%;
 }
