@@ -10,5 +10,8 @@ exports.home= async (req, res) => {
 
   hotProducts = hotProducts.slice(6);
 
+  for(let i=0;i<hotProducts.length;i++) 
+    hotProducts[i].price=hotProducts[i].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+
   res.render('home/page',{hotProducts})
 };
