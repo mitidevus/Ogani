@@ -19,7 +19,7 @@ exports.detail= async (req, res) => {
         listProductRelated.push(products[i]);
       }
   }
-  console.log(listProductRelated)
+  //console.log(listProductRelated)
 
   product[0].price=product[0].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
 
