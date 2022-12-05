@@ -4,9 +4,9 @@ const qs = require('qs');
 
 exports.home= async (req, res) => {
   let  hotProducts = []; 
-  let  categories = []; 
+  //let  categories = []; 
   hotProducts = await homeService.getAllProduct();
-  categories = await homeService.getAllCategory();
+  //categories = await homeService.getAllCategory();
 
   hotProducts = hotProducts.slice(6);
 
