@@ -32,3 +32,7 @@ exports.getSortedProductByRate_Star_ASC = () => {
 exports.getSortedProductByRate_Star_DESC = () => {
     return shopRepository.getSortedProductByRate_Star_DESC();
 }
+
+exports.getProductByCategory = (cate_Id) => {
+    return shopRepository.getProductByCategory(cate_Id);
+}

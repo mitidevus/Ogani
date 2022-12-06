@@ -39,3 +39,8 @@ exports.getSortedProductByRate_Star_DESC = async () => {
     const result = await db.connection.execute('select * from Product order by rate_star DESC');
     return result[0];
 }
+
+exports.getProductByCategory = async (cate_Id) => {
+    const result = await db.connection.execute('select * from Product where category_Id = ?', [cate_Id]);
+    return result[0];
+}
