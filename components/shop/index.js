@@ -3,7 +3,8 @@ const router = express.Router();
 
 const shopController = require('./shopController');
 
-router.get('/:filter', shopController.shop); //shop page
-router.get('/product_category/:category', shopController.category); //shop page
+router.get('/', shopController.shop);
+router.get('/sort/:filter', shopController.shop);
+router.get('/product_category/:category', shopController.category);
 
 module.exports = router;

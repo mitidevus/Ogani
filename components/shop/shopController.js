@@ -3,65 +3,82 @@ const qs = require('qs');
 
 exports.shop = async (req, res) => {
   const filter = req.params.filter;
-  const { sort } = req.params;
   const { name: nameFilter } = req.query;
-  console.log("sort", sort);
-  console.log("filter", filter);
-  console.log("nameFilter", nameFilter);
 
   let listProducts = [];
-  let listCategory = [];
-  let latestProduct = [];
-
-  if (filter === "0") {
-    listProducts = await shopService.getAllProduct();
+  if (nameFilter) {
+    listProducts = await shopService.filter(nameFilter);
   }
-  else if (filter === "1") {
+  else if (filter === "price-asc") {
     listProducts = await shopService.getSortedProductByPrice_ASC();
   }
-  console.log(listProducts);
+  else if (filter === "price-desc") {
+    listProducts = await shopService.getSortedProductByPrice_DESC();
+  }
+  else if (filter === "date-new") {
+    listProducts = await shopService.getSortedProductByRelease_Date_Latest();
+  }
+  else if (filter === "date-old") {
+    listProducts = await shopService.getSortedProductByRelease_Date_Oldest();
+  }
+  else if (filter === "rate-star-asc") {
+    listProducts = await shopService.getSortedProductByRate_Star_ASC();
+  }
+  else if (filter === "rate-star-desc") {
+    listProducts = await shopService.getSortedProductByRate_Star_DESC();
+  }
+  else {
+    listProducts = await shopService.getAllProduct();
+  }
 
-  listCategory = await shopService.getAllCategory();
-  latestProduct = await shopService.getSortedProductByRelease_Date_Latest();
+  console.log("listProducts", listProducts);
+
+  for (let i = 0; i < listProducts.length; i++) {
+    listProducts[i].price = listProducts[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  }
+
+  let listCategory = await shopService.getAllCategory();
+
+  let latestProduct = await shopService.getSortedProductByRelease_Date_Latest();
   latestProduct = latestProduct.slice(0, 5);
 
-  for (let i = 0; i < listProducts.length; i++)
-    listProducts[i].price = listProducts[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
-
-  for (let i = 0; i < latestProduct.length; i++)
+  for (let i = 0; i < latestProduct.length; i++) {
     latestProduct[i].price = latestProduct[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  }
 
-  console.log(listCategory);
-
-  // res.render('shop/page', { listProducts, listCategory, latestProduct });
-
-  res.render('shop/page', { listProducts, listCategory, latestProduct });
+  res.render('shop/page', { listProducts, listCategory, latestProduct, originalUrl: `${req.baseUrl}/${qs.stringify(filter)}` });
 };
 
 exports.category = async (req, res) => {
-  const cate_Id = req.params.category;
-  const listProducts = await shopService.getProductByCategory(cate_Id);
-  console.log(listProducts);
+  let cate_Id = req.params.category;
+  const { name: nameFilter } = req.query;
+  console.log("nameFilter", nameFilter);
 
-  latestProduct = await shopService.getSortedProductByRelease_Date_Latest();
+  let listProducts = [];
 
-  latestProduct = latestProduct.slice(0, 5);
+  if (nameFilter) {
+    let allProductByCategory = await shopService.getProductByCategory(cate_Id);
+    allProductByCategory.forEach((product) => {
+      if (product.name.toLowerCase().includes(nameFilter.toLowerCase())) {
+        listProducts.push(product);
+      }
+    });
+  }
+  else {
+    listProducts = await shopService.getProductByCategory(cate_Id);
+  }
 
-  listCategory = await shopService.getAllCategory();
-
-  for (let i = 0; i < listProducts.length; i++)
+  for (let i = 0; i < listProducts.length; i++) {
     listProducts[i].price = listProducts[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  }
 
-  for (let i = 0; i < latestProduct.length; i++)
+  let listCategory = await shopService.getAllCategory();
+
+  let latestProduct = await shopService.getSortedProductByRelease_Date_Latest();
+  latestProduct = latestProduct.slice(0, 5);
+  for (let i = 0; i < latestProduct.length; i++) {
     latestProduct[i].price = latestProduct[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  }
 
-
-  // console.log("req.baseUrl", req.baseUrl);
-  // console.log("category", category);
-  // console.log("qs.stringify(withoutCategory)", withoutCategory);
-
-  const { category, ...withoutcategory } = req.query;
-  // res.render('products/list', { products, originalUrl: `${req.baseUrl}/${qs.stringify(withoutcategory)}` });
-
-  res.render('shop/page', { listProducts, latestProduct, listCategory, originalUrl: `${req.baseUrl}/${qs.stringify(withoutcategory)}` });
+  res.render('shop/page', { listProducts, latestProduct, listCategory, originalUrl: `${req.baseUrl}/${qs.stringify(cate_Id)}` });
 }

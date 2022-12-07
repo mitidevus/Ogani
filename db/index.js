@@ -10,7 +10,6 @@ const db = { connection: null };
     user: 'root',
     password: '123456',
     database: 'ogani',
-    password:'123456'
   });
   console.log('Database connected!');
 })();

@@ -1,4 +1,3 @@
-const { connection } = require('../../db');
 const shopRepository = require('./shopRepository');
 
 exports.getAllProduct = () => {
@@ -35,4 +34,8 @@ exports.getSortedProductByRate_Star_DESC = () => {
 
 exports.getProductByCategory = (cate_Id) => {
     return shopRepository.getProductByCategory(cate_Id);
+}
+
+exports.filter = (nameFilter) => {
+    return shopRepository.filter(nameFilter);
 }
