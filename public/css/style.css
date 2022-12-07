@@ -83,7 +83,7 @@ p {
     margin: 0 0 15px 0;
 }
 
-.sp-qc  {
+.sp-qc {
     font-weight: bold;
 }
 
@@ -460,7 +460,7 @@ ol {
     display: block;
 }
 
-.header__menu ul li .header__menu__dropdown li:hover > a {
+.header__menu ul li .header__menu__dropdown li:hover>a {
     /* color: #7fad39; */
 }
 
@@ -481,7 +481,7 @@ ol {
     visibility: visible;
 }
 
-.header__menu ul li:hover > a {
+.header__menu ul li:hover>a {
     color: #7fad39;
 }
 
@@ -1182,9 +1182,7 @@ ol {
     border-radius: 0;
 }
 
-.price-range-wrap
-    .price-range
-    .ui-slider-range.ui-corner-all.ui-widget-header:last-child {
+.price-range-wrap .price-range .ui-slider-range.ui-corner-all.ui-widget-header:last-child {
     background: #dd2222;
 }
 
@@ -1290,9 +1288,7 @@ ol {
     width: 100%;
 }
 
-.product__discount__item:hover
-    .product__discount__item__pic
-    .product__item__pic__hover {
+.product__discount__item:hover .product__discount__item__pic .product__item__pic__hover {
     bottom: 20px;
 }
 
@@ -1444,7 +1440,7 @@ ol {
 
 .filter__sort {
     margin-bottom: 15px;
-	z-index: 1;
+    z-index: 1;
 }
 
 .filter__sort span {
@@ -1980,23 +1976,11 @@ ol {
     color: #1c1c1c;
 }
 
-.shoping__cart__table
-    table
-    tbody
-    tr
-    td.shoping__cart__quantity
-    .pro-qty
-    input::placeholder {
+.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty input::placeholder {
     color: #1c1c1c;
 }
 
-.shoping__cart__table
-    table
-    tbody
-    tr
-    td.shoping__cart__quantity
-    .pro-qty
-    .qtybtn {
+.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty .qtybtn {
     width: 15px;
 }
 
@@ -2182,12 +2166,12 @@ ol {
     visibility: hidden;
 }
 
-.checkout__input__checkbox label input:checked ~ .checkmark {
+.checkout__input__checkbox label input:checked~.checkmark {
     background: #7fad39;
     border-color: #7fad39;
 }
 
-.checkout__input__checkbox label input:checked ~ .checkmark:after {
+.checkout__input__checkbox label input:checked~.checkmark:after {
     opacity: 1;
 }
 
@@ -3753,12 +3737,12 @@ li {
 
 .sort-list {
     padding: 4px 16px;
-	background-color: #28a745;
+    background-color: #28a745;
     border: 1px solid #e1e1e1;
     border-radius: 4px;
     cursor: pointer;
     position: absolute;
-	z-index: 1;
+    z-index: 1;
 }
 
 .sort-list:hover .sort-by {
@@ -3770,15 +3754,15 @@ li {
 }
 
 .sort-item {
-	color: #fff !important;
+    color: #fff !important;
 }
 
 .product__item__price {
-	color: #000;
-	text-decoration: none;
+    color: #000;
+    text-decoration: none;
 }
 
 .product__item__price:hover {
-	color: #000;
-	text-decoration: none;
+    color: #000;
+    text-decoration: none;
 }
