@@ -3605,3 +3605,13 @@ ol {
 .filter_style:hover {
 	color: black;
 }
+
+.product__item__price {
+	color: #000;
+	text-decoration: none;
+}
+
+.product__item__price:hover {
+	color: #000;
+	text-decoration: none;
+}
