@@ -9,7 +9,7 @@ const db = {connection: null};
     host: 'localhost',
     user: 'root',
     database: 'ogani',
-    password:'14022002'
+    password:'241002'
   });
   console.log('Database connected!');
 })();
