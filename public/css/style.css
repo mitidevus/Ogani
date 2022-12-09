@@ -3766,3 +3766,13 @@ li {
     color: #000;
     text-decoration: none;
 }
+
+.align-right {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Register-style{
+    margin-left: 30px;
+}

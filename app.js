@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
-const exphbs = require("express-handlebars");
-const expressHandlebarsSections = require("express-handlebars-sections");
+// const exphbs = require("express-handlebars");
+// const expressHandlebarsSections = require("express-handlebars-sections");
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -15,6 +15,8 @@ const detailRouter = require('./components/detail');
 const blogRouter = require('./components/blog');
 const contactRouter = require('./components/contact');
 const cartCheckoutRouter = require('./components/cartCheckout');
+const registerRouter = require('./components/register');
+const LoginRouter = require('./components/login');
 
 const app = express();
 
@@ -37,6 +39,8 @@ app.use('/detail', detailRouter);
 app.use('/blog', blogRouter);
 app.use('/contact', contactRouter);
 app.use('/cartCheckout', cartCheckoutRouter);
+app.use('/register', registerRouter);
+app.use('/login', LoginRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req,
