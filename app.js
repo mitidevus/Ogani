@@ -17,6 +17,7 @@ const contactRouter = require('./components/contact');
 const cartCheckoutRouter = require('./components/cartCheckout');
 const registerRouter = require('./components/register');
 const LoginRouter = require('./components/login');
+const accountRouter = require('./components/account');
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/contact', contactRouter);
 app.use('/cartCheckout', cartCheckoutRouter);
 app.use('/register', registerRouter);
 app.use('/login', LoginRouter);
+app.use('/account', accountRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req,

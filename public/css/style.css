@@ -3773,6 +3773,17 @@ li {
     justify-content: flex-end;
 }
 
+.center {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+#my-table {
+    overflow: hidden;
+    word-wrap: normal, break-word;
+}
+
 .Register-style{
     margin-left: 30px;
 }
