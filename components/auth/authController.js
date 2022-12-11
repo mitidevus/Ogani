@@ -12,12 +12,15 @@ exports.showRegistrationForm = (req, res) => {
 };
 
 exports.register = async (req, res) => {
+  
   // syntax validation
   if (!ajv.validate(registerSchema, req.body)) {
     res.render('auth/register', { error: 'Invalid input!' });
     return;
   }
+
   const { fullname, email, address, password } = req.body;
+  console.log(fullname+ " "+ email+ " "+ address+ " "+ password)
   try {
     await authService.register(fullname, email, address, password);
   } catch (e) {
@@ -31,7 +34,6 @@ exports.register = async (req, res) => {
 };
 
 exports.showLoginForm = (req, res) => {
-  
   res.render('auth/login');
 };
 

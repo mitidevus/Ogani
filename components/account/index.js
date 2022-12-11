@@ -3,6 +3,6 @@ const router = express.Router();
 
 const accountController = require('./accountController');
 
-router.get('/', accountController.account);
+router.get('/:email', accountController.account);
 
 module.exports = router;

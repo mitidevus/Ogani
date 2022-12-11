@@ -10,11 +10,12 @@ exports.emailExists = async (email) => {
  * @returns {Promise<object|null>}
  */
 exports.getUserByEmail = async (email) => {
-  const result = await db.connection.execute('select * from users where email = ? limit 1', [email]);
+  const result = await db.connection.execute('select * from user where email = ? limit 1', [email]);
+  //console.log(typeof result[0][0].user_Id)
   return result[0] && result[0][0];
 };
 
 
-exports.insertUser = async (fullName, email, password) => {
-  await db.connection.execute('INSERT INTO `Users` (`fullname`, `email`, `address`, `password`) VALUES (?,?,?)', [email, password, fullName]);
+exports.insertUser = async (fullname,email,address, password) => {
+  await db.connection.execute('INSERT INTO `user` (`fullname`, `email`, `address`, `password`) VALUES (?,?,?)', [fullname,email,address, password]);
 };
