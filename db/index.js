@@ -8,10 +8,15 @@ const db = { connection: null };
 (async () => {
   // create the connection to database
   db.connection = await mysql.createConnection({
-    host: "us-cdbr-east-06.cleardb.net",
-    user: "b0970366aef1fb",
-    password: "ed5e0c83",
-    database:"heroku_4932217c006f01d"
+    // host: "us-cdbr-east-06.cleardb.net",
+    // user: "b0970366aef1fb",
+    // password: "ed5e0c83",
+    // database:"heroku_4932217c006f01d"
+
+    host: 'localhost',
+    user: 'root',
+    password: '14022002',
+    database: 'ogani'
   });
   console.log('Database connected!');
 })();
