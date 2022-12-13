@@ -42,15 +42,32 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                            </div>
+                        <div class="header__top__right align-right">
+                           
 
-                            <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                            <div class="header__top__right__auth align-right">
+                                {{!-- <a href="#"><i class="fa fa-user"></i> Login/</a>
+                                <a href="#"><i class="fa fa-user"></i> Register</a> --}}
+
+                                {{#if user}}
+                                    
+                                    welcome
+                                    <a href="/account/{{user.user_Id}}"> <i class="fa fa-user" style="margin-left: 10px;"></i>{{user.fullname}} </a>
+                                    <a href="/auth/logout"> <i class="fas fa-sign-out-alt" style="margin-left: 10px;"></i>Logout</a>
+                                
+                                {{else}}
+
+                                    <a href="/auth/login">
+                                        <i class="fas fa-sign-in-alt" style="margin-left: 10px;"></i>
+                                        Login
+                                    </a>
+                                    <a href="/auth/register">
+                                        <i class="fa fa-user-plus" style="margin-left: 10px;"></i>
+                                        Register
+                                    </a>
+                                    
+                                {{/if}}
+                               
                             </div>
                         </div>
                     </div>
