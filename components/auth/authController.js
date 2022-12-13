@@ -25,7 +25,6 @@ exports.register = async (req, res) => {
     return;
   }
 
-  console.log(fullname + " " + email + " " + address + " " + password)
   try {
     await authService.register(fullname, email, address, password);
 
