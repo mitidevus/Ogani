@@ -12,25 +12,35 @@ exports.showRegistrationForm = (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  
   // syntax validation
   if (!ajv.validate(registerSchema, req.body)) {
     res.render('auth/register', { error: 'Invalid input!' });
     return;
   }
 
-  const { fullname, email, address, password } = req.body;
-  console.log(fullname+ " "+ email+ " "+ address+ " "+ password)
-  try {
-    await authService.register(fullname, email, address, password);
-  } catch (e) {
-    
-    res.render('auth/register', { error: e.message });//kt mail có dùng để đăng ký hay chưa
+  const { fullname, email, address, password, re_password } = req.body;
+
+  if (password !== re_password) {
+    res.render('auth/register', { error: 'Password does not match!' });
     return;
   }
 
-  
-  res.redirect('/');
+  console.log(fullname + " " + email + " " + address + " " + password)
+  try {
+    await authService.register(fullname, email, address, password);
+
+    const user = await authService.getUserByEmail(email);
+    console.log("user: ", user);
+    if (!user) {
+      console.log("user null");
+      return;
+    }
+
+    res.redirect('/');
+  } catch (e) {
+    res.render('auth/register', { error: e.message }); //kt mail có dùng để đăng ký hay chưa
+    return;
+  }
 };
 
 exports.showLoginForm = (req, res) => {

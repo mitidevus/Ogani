@@ -12,10 +12,9 @@ const db = { connection: null };
     // user: "b0970366aef1fb",
     // password: "ed5e0c83",
     // database:"heroku_4932217c006f01d"
-
     host: 'localhost',
     user: 'root',
-    password: '14022002',
+    password: '123456',
     database: 'ogani'
   });
   console.log('Database connected!');

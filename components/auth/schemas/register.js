@@ -3,9 +3,10 @@ module.exports = {
   properties: {
     fullname: { type: 'string', 'minLength': 1 },
     email: { type: 'string', format: 'email' },
-    address: {type: 'string', 'minLength':6},
-    password: { type: 'string', 'minLength': 3 },
+    address: { type: 'string', 'minLength': 1 },
+    password: { type: 'string', 'minLength': 6 },
+    re_password: { type: 'string', 'minLength': 1 },
   },
-  required: ['fullname', 'email', 'address', 'password'],
+  required: ['fullname', 'email', 'address', 'password', 're_password'],
   additionalProperties: false,
 };

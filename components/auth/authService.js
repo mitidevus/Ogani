@@ -7,7 +7,7 @@ exports.register = async (fullname, email, address, password) => {
     throw new Error('Email exists!');
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
-  return authRepository.insertUser(fullname, email, address,hash);
+  return authRepository.insertUser(fullname, email, address, hash);
 }
 
 /**
@@ -18,18 +18,19 @@ exports.register = async (fullname, email, address, password) => {
  */
 exports.checkUserCredential = async (email, password) => {
   const user = await authRepository.getUserByEmail(email);
-  //console.log("fullname= "+user.fullname)
+  // console.log("fullname: ", user.fullname)
   if (!user) return null;
 
-  // let tam=await bcrypt.compare(password, user.password)
-  // console.log(tam)
+  let temp = await bcrypt.compare(password, user.password);
 
-  //let tam = (password===user.password)
-
-  if (password===user.password)
-  {
+  if (temp) {
     return user;
   }
-  
   return null;
 }
+
+exports.getUserByEmail = async (email) => {
+  const result = await authRepository.getUserByEmail(email);
+  if (!result) return null;
+  return result;
+};
