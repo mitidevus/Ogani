@@ -3787,3 +3787,29 @@ li {
 .Register-style{
     margin-left: 30px;
 }
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    min-height: 90vh;
+    width: 100%;
+}
+
+.auth-form {
+    width: 400px;
+    min-height: 100px;
+    padding: 48px 32px 64px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    margin: 24px;
+    align-self: center;
+    box-shadow: 0 2px 5px 0 rgba(51, 62, 73, 0.1);
+}
+
+.auth-error {
+    background-color: #f87171;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 16px;
+}
