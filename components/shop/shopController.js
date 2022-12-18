@@ -72,10 +72,11 @@ exports.shop = async (req, res) => {
     listProducts = await shopService.filter(nameFilter);
     console.log("listProducts Filter", listProducts);
   }
-  if (filter === "price-asc") {
+  else if (filter === "price-asc") {
     if (listProducts.length === 0)
       listProducts = await shopService.getSortedProductByPrice_ASC();
     else listProducts.sort((a, b) => a.price - b.price);
+    console.log("haha");
   }
   else if (filter === "price-desc") {
     if (listProducts.length === 0)
