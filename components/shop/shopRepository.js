@@ -47,5 +47,6 @@ exports.getProductByCategory = async (cate_Id) => {
 
 exports.filter = async (nameFilter) => {
     const result = await db.connection.execute(`SELECT * FROM product WHERE name LIKE ?`, [`%${nameFilter}%`]);
+    console.log("result[0]", result[0]);
     return result[0];
 }
