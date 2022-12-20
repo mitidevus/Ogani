@@ -20,6 +20,7 @@ const cartCheckoutRouter = require('./components/cartCheckout');
 const accountRouter = require('./components/account');
 const authRouter = require('./components/auth');
 const passport = require('./components/auth/passport');
+const { SESSION_SECRET } = require('./config/index.js')
 
 const app = express();
 
@@ -28,7 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(session({
-  secret: 'very secret keyboard cat',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
 }));

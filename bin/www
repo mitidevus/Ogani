@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-require("dotenv").config();
+const { PORT } = require('../config/index.js')
 var app = require('../app');
 var debug = require('debug')('hello-express:server');
 var http = require('http');
@@ -15,7 +15,7 @@ require('../db');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || 3000);
+var port = normalizePort(PORT);
 app.set('port', port);
 
 /**
