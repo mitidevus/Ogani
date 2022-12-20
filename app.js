@@ -20,6 +20,7 @@ const cartCheckoutRouter = require('./components/cartCheckout');
 const accountRouter = require('./components/account');
 const authRouter = require('./components/auth');
 const passport = require('./components/auth/passport');
+const auth = require('./middlewares/auth');
 
 const app = express();
 
@@ -28,7 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(session({
-  secret: 'very secret keyboard cat',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
 }));
@@ -55,7 +56,7 @@ app.use('/contact', contactRouter);
 app.use('/cartCheckout', cartCheckoutRouter);
 // app.use('/register', registerRouter);
 // app.use('/login', LoginRouter);
-app.use('/account', accountRouter);
+app.use('/account', auth, accountRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
