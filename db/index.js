@@ -1,8 +1,7 @@
 // get the client
 const mysql = require('mysql2/promise');
-const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = require("../config/index.js")
+const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = require("../config/")
 
-const { DB_HOST, DB_PASSWORD, DB_USERNAME, DB_DATABASE } = require('../config');
 const db = { connection: null };
 
 (async () => {
