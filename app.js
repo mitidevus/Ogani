@@ -20,6 +20,7 @@ const cartCheckoutRouter = require('./components/cartCheckout');
 const accountRouter = require('./components/account');
 const authRouter = require('./components/auth');
 const passport = require('./components/auth/passport');
+const auth = require('./middlewares/auth');
 const { SESSION_SECRET } = require('./config/index.js')
 
 const app = express();
@@ -56,7 +57,7 @@ app.use('/contact', contactRouter);
 app.use('/cartCheckout', cartCheckoutRouter);
 // app.use('/register', registerRouter);
 // app.use('/login', LoginRouter);
-app.use('/account', accountRouter);
+app.use('/account', auth, accountRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler

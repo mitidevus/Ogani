@@ -35,7 +35,12 @@ exports.register = async (req, res) => {
       return;
     }
 
-    res.redirect('/');
+    req.login(user, function (err) {
+      if (err) { 
+        return next(err);
+      }
+      return res.redirect('/');
+    });
   } catch (e) {
     res.render('auth/register', { error: e.message }); //kt mail có dùng để đăng ký hay chưa
     return;

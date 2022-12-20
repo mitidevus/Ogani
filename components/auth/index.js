@@ -3,6 +3,7 @@ const router = express.Router();
 
 const authController = require('./authController');
 const passport = require('./passport');
+const auth = require('../../middlewares/auth');
 
 router.get('/register', authController.showRegistrationForm);
 router.post('/register', authController.register);
@@ -13,6 +14,6 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/auth/login',
 }));
 
-router.get('/logout', authController.logout);
+router.get('/logout', auth, authController.logout);
 
 module.exports = router;
