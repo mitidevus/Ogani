@@ -3813,3 +3813,12 @@ li {
     font-weight: bold;
     padding: 8px 16px;
 }
+
+.wrapper-button{
+     
+    margin-left: 520px;
+}
+.is_acctive{
+    background: #7fad39;
+    color: #fff !important;
+}

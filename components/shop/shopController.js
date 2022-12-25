@@ -9,6 +9,8 @@ exports.shop = async (req, res) => {
   let url_filter = "";
   let url_sort = "";
 
+  currentPage=parseInt(currentPage);
+
   console.log("currentPage", currentPage);
 
   console.log("a= " + nameFilter)
@@ -102,6 +104,8 @@ exports.category = async (req, res) => {
   let url_sort = "";
 
   console.log("currentPage", currentPage);
+
+  currentPage=parseInt(currentPage);
 
   if (filter) url_sort = "/sort/" + filter;
 
