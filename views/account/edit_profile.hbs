@@ -1,21 +1,31 @@
-<body
-    style="background-image: url(../img/auth/auth_background.jpg);
-        background-size: cover; 
-        background-position: center;
-        background-repeat: no-repeat;"
->
+<div class="background-wrapper">
     <div class="auth-wrapper">
         <form method="post" class="auth-form">
             <h3>Edit Profile</h3>
+
             <div class="my-3 form-group">
                 <input name="id" type="hidden" value={{user.user_Id}} />
             </div>
+
             <div class="my-3 form-group">
-                <input name="fullname" type="text" class="form-control" placeholder="Fullname" required />
+                <span class="ml-2" style="font-weight: 600;">
+                    Fullname
+                </span>
+                <input value="{{user.fullname}}" name="fullname" type="text" class="form-control" required />
             </div>
 
             <div class="mb-3 form-group">
-                <input name="address" type="text" class="form-control" placeholder="Address" required />
+                <span class="ml-2" style="font-weight: 600;">
+                    Address
+                </span>
+                <input value="{{user.address}}" name="address" type="text" class="form-control" required />
+            </div>
+
+            <div class="mb-3 form-group">
+                <span class="ml-2" style="font-weight: 600;">
+                    Avatar URL
+                </span>
+                <input value="{{user.avatar}}" name="avatar" type="text" class="form-control" required />
             </div>
 
             <div class="d-grid center mb-3 form-group">
@@ -23,9 +33,4 @@
             </div>
         </form>
     </div>
-
-    <script src="/js/jquery_login.min.js"></script>
-    <script src="/js/popper_login.js"></script>
-    <script src="/js/bootstrap_login.min.js"></script>
-    <script src="/js/main_login.js"></script>
-</body>
+</div>

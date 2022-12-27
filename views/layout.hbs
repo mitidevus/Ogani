@@ -47,14 +47,18 @@
                                 <a href="#"><i class="fa fa-user"></i> Register</a> }}
 
                                     {{#if user}}
-
-                                        Welcome
                                         <a href="/account/userInfo">
-                                            <i class="fa fa-user" style="margin-left: 10px;"></i>{{user.fullname}}
+                                            <img
+                                                src="{{user.avatar}}"
+                                                alt="avatar"
+                                                style="width: 30px; height: 30px; border-radius: 50%; margin-right: 4px;"
+                                            />
+                                            {{user.fullname}}
                                         </a>
+                                        <span style="margin-left: 8px; margin-right: 8px; margin-bottom: 4px;">|</span>
                                         <a href="/auth/logout">
-                                            <i class="fas fa-sign-out-alt" style="margin-left: 10px;"></i>Logout</a>
-
+                                            <i class="fas fa-sign-out-alt"></i>Logout
+                                        </a>
                                     {{else}}
 
                                         <a href="/auth/login">
@@ -175,7 +179,7 @@
                 </div>
             </div>
         </footer>
-        
+
         <!-- Js Plugins -->
         <script src="/js/jquery-3.3.1.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>

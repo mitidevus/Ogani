@@ -3788,6 +3788,13 @@ li {
     margin-left: 30px;
 }
 
+.background-wrapper {
+    background-image: url(../img/auth/auth_background.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .auth-wrapper {
     display: flex;
     justify-content: center;

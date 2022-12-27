@@ -70,19 +70,10 @@
     </div>
     {{#extend "scripts"}}
         <script>
-            $('#email').change(function () {
-                $.getJSON('/api/auth/verify-email/' + $(this).val(), function (data) {
-                    if (data) {
-                        $('#existed-email').hide();
-                        $('#valid-email').show();
-                        $('#register-button').attr('disabled', false)
-                    } else {
-                        $('#existed-email').show();
-                        $('#valid-email').hide();
-                        $('#register-button').attr('disabled', true)
-                    }
-                });
-            });
+            $('#email').change(function () { $.getJSON('/api/auth/verify-email/' + $(this).val(), function (data) { if
+            (data) { $('#existed-email').hide(); $('#valid-email').show(); $('#register-button').attr('disabled', false)
+            } else { $('#existed-email').show(); $('#valid-email').hide(); $('#register-button').attr('disabled', true)
+            } }); });
         </script>
     {{/extend}}
 </body>
