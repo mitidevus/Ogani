@@ -3812,4 +3812,14 @@ li {
     font-size: 12px;
     font-weight: bold;
     padding: 8px 16px;
+    margin-top: 12px;
+}
+
+.auth-success {
+    background-color: #4daa57;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 16px;
+    margin-top: 12px;
 }
