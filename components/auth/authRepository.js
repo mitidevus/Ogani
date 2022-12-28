@@ -20,3 +20,12 @@ exports.getUserByEmail = async (email) => {
 exports.insertUser = async (fullname, email, address, password) => {
   await db.connection.execute('INSERT INTO `user` (`fullname`, `email`, `address`, `password`) VALUES (?,?,?,?)', [fullname, email, address, password]);
 };
+
+exports.getUserById = async (id) => {
+  const result = await db.connection.execute('select * from user where user_Id = ?', [id]);
+  return result[0] && result[0][0];
+};
+
+exports.updatePassword = async (id, password) => {
+  await db.connection.execute('UPDATE `user` SET `password` = ? WHERE (`user_Id` = ?)', [password, id]);
+};

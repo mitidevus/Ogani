@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs");
-
 const authRepository = require("./authRepository");
 
 exports.register = async (fullname, email, address, password) => {
@@ -32,6 +31,18 @@ exports.getUserByEmail = async (email) => {
     const result = await authRepository.getUserByEmail(email);
     if (!result) return null;
     return result;
+};
+
+exports.getUserById = async (id) => {
+    const result = await authRepository.getUserById(id);
+    if (!result) return null;
+    return result;
+};
+
+exports.updatePassword = async (id, password) => {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    return authRepository.updatePassword(id, hash);
 };
 
 exports.emailExists = (email) => authRepository.emailExists(email);
