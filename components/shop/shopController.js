@@ -5,11 +5,11 @@ const itemsPerPage = 3;
 exports.shop = async (req, res) => {
   const filter = req.params.filter;
   const { name: nameFilter } = req.query;
-  let currentPage = req.params.page;
+  let currentPage = req.query.page || 1;
   let url_filter = "";
   let url_sort = "";
 
-  currentPage=parseInt(currentPage);
+  currentPage=Number(currentPage);
 
   console.log("currentPage", currentPage);
 
@@ -23,7 +23,7 @@ exports.shop = async (req, res) => {
 
   let listProducts = [];
   if (!nameFilter && !filter) {
-    listProducts = await shopService.getAllProduct();
+    listProducts = await shopService.getAllProduct(currentPage);
   }
   if (nameFilter) {
     listProducts = await shopService.filter(nameFilter);
@@ -50,20 +50,7 @@ exports.shop = async (req, res) => {
       listProducts = await shopService.getSortedProductByRate_Star_DESC();
     else listProducts.sort((a, b) => b.rate_star - a.rate_star);
   }
-
-  console.log("listProducts.length", listProducts.length);
-
-  const sumPage = Math.ceil(listProducts.length / itemsPerPage); //tổng số page cần có để chứa các sp
-
-  let listTemp = [];
-  for (let i = (currentPage - 1) * itemsPerPage; i < (currentPage - 1) * itemsPerPage + itemsPerPage; i++)
-    if (i >= listProducts.length) break;
-    else {
-      listTemp.push(listProducts[i]);
-      console.log("listProducts[i]", listProducts[i]);
-    }
-  listProducts = listTemp;
-
+  const sumPage = listProducts.total_page;
   for (let i = 0; i < listProducts.length; i++) {
     listProducts[i].price = listProducts[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
   }
@@ -133,42 +120,49 @@ exports.category = async (req, res) => {
     listProducts = await shopService.getProductByCategory(cate_Id);
   }
 
-  for (let i = 0; i < listProducts.length; i++) {
-    listProducts[i].price = listProducts[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  for (let i = 0; i < listProducts.data.length; i++) {
+    listProducts.data[i].price = listProducts.data[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
   }
 
-  let listCategory = await shopService.getAllCategory();
+  res.json(listProducts.data)
+  // res.render('shop/page', { url_sort, url_link, cate_Id, checkCategory, listProducts, latestProduct, listCategory, listLeftPage, listcurrentPage, listRightPage, originalUrl: `/shop/product_category/${cate_Id}/page/1/${qs.stringify(filter)}` });
+}
 
-  let latestProduct = await shopService.getSortedProductByRelease_Date_Latest();
-  latestProduct = latestProduct.slice(0, 5);
-  for (let i = 0; i < latestProduct.length; i++) {
-    latestProduct[i].price = latestProduct[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+exports.getApiProducts = async (req, res) => {
+  // const filter = req.params.filter
+  const { name: nameFilter, sort: filter, cate_id: cate_id, min: min, max: max } = req.query;
+  console.log("Query: ", req.query);
+  let currentPage = req.query.page ||1;
+
+  currentPage=Number(currentPage);
+  //kt nếu có số page
+
+  let listProducts;
+  if (!nameFilter && !filter && !cate_id && !min && !max) {
+    listProducts = await shopService.getAllProduct(currentPage);
+    return res.json(listProducts);
+  }
+  
+  if (filter === "price-asc") {
+    listProducts = await shopService.getSortedProductByPrice_ASC(currentPage, cate_id, nameFilter, min, max);
+  }
+  else if (filter === "price-desc") {
+      listProducts = await shopService.getSortedProductByPrice_DESC(currentPage, cate_id, nameFilter, min, max);
+  }
+  else if (filter === "rate-star-asc") {
+      listProducts = await shopService.getSortedProductByRate_Star_ASC(currentPage, cate_id, nameFilter, min, max);
+  }
+  else if (filter === "rate-star-desc") {
+      listProducts = await shopService.getSortedProductByRate_Star_DESC(currentPage, cate_id, nameFilter, min, max);
+  }else {
+    listProducts = await shopService.filter(currentPage, cate_id, nameFilter, min, max);
   }
 
-  const sumPage = Math.ceil(listProducts.length / itemsPerPage);//tổng số page cần có để chứa các sp
 
-  let listTemp = []
-  for (let i = (currentPage - 1) * itemsPerPage; i < (currentPage - 1) * itemsPerPage + itemsPerPage; i++)
-    if (i >= listProducts.length) break;
-    else {
-      listTemp.push(listProducts[i]);
-    }
-  listProducts = listTemp
-
-  let listcurrentPage = currentPage;
-  let listLeftPage = [];
-  let listRightPage = [];
-
-  for (let i = currentPage - 2; i <= currentPage + 2; i++) {
-    if (i < currentPage) {
-      if (i > 0) listLeftPage.push(i)
-    }
-    if (i > currentPage) {
-      if (i <= sumPage) listRightPage.push(i)
-    }
+  for (let i = 0; i < listProducts.data.length; i++) {
+    listProducts.data[i].price = listProducts.data[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
   }
 
-  console.log("url_link", url_link);
 
-  res.render('shop/page', { url_sort, url_link, cate_Id, checkCategory, listProducts, latestProduct, listCategory, listLeftPage, listcurrentPage, listRightPage, originalUrl: `/shop/product_category/${cate_Id}/page/1/${qs.stringify(filter)}` });
+  return res.json(listProducts);
 }

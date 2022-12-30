@@ -3814,11 +3814,28 @@ li {
     padding: 8px 16px;
 }
 
-.wrapper-button{
-     
-    margin-left: 520px;
-}
 .is_acctive{
     background: #7fad39;
-    color: #fff !important;
+    color: white !important;
+}
+
+.wrapper-button{
+    margin-left: 550px;
+}
+
+
+#minamounth {
+    margin-bottom: 30px ; 
+    font-size: 1.3rem;
+    border: 2px solid #28a745;
+    
+}
+#maxamounth {
+    margin-bottom: 30px ; 
+    font-size: 1.3rem;
+    border: 2px solid #28a745;
+}
+
+input::placeholder {
+    color: grey;
 }

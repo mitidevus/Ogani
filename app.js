@@ -11,6 +11,7 @@ const usersRouter = require('./routes/users');
 // const indexRouter = require('./routes/index');
 const homeRouter = require('./components/home');
 const shopRouter = require('./components/shop');
+const apiShopRouter = require('./components/shop/api');
 const detailRouter = require('./components/detail');
 const blogRouter = require('./components/blog');
 const contactRouter = require('./components/contact');
@@ -52,6 +53,7 @@ app.use(function (req, res, next) {
 app.use('/users', usersRouter);
 app.use('/', homeRouter);
 app.use('/shop', shopRouter);
+app.use('/api/shop', apiShopRouter);
 app.use('/detail', detailRouter);
 app.use('/blog', blogRouter);
 app.use('/contact', contactRouter);
