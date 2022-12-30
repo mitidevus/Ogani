@@ -8,3 +8,7 @@ exports.getAllProduct = () => {
 exports.getProductById = (productId) => {
     return detailRepository.getProductById(productId);
 }
+
+exports.getReviewByProductId = (productId) => {
+    return detailRepository.getReviewByProductId(productId);
+}

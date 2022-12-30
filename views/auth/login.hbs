@@ -1,4 +1,4 @@
-<html lang="en">
+{{! <html lang="en">
 
 <head>
     <link rel="shortcut icon" type="image/png" href="/img/title/icon-shop.png" />
@@ -25,14 +25,15 @@
 <body style="background-image: url(../img/auth/auth_background.jpg);
         background-size: cover; 
         background-position: center;
-        background-repeat: no-repeat;">
+        background-repeat: no-repeat;"> }}
 
+<div class="background-wrapper">
     <div class="auth-wrapper">
         <form method="post" class="auth-form">
             <h3>Login</h3>
 
             {{#if error}}
-            <p class="auth-error">{{error}}</p>
+                <p class="auth-error">{{error}}</p>
             {{/if}}
 
             <div class="my-3 form-group">
@@ -67,6 +68,7 @@
             </p>
         </form>
     </div>
-</body>
+</div>
+{{! </body> }}
 
-</html>
+{{! </html> }}

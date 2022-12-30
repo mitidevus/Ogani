@@ -1,10 +1,11 @@
-<body
+{{! <body
     style="background-image: url(../img/auth/auth_background.jpg);
         background-size: cover; 
         background-position: center;
         background-repeat: no-repeat;"
->
+> }}
 
+<div class="background-wrapper">
     <div class="auth-wrapper">
         <form method="post" class="auth-form">
             <h3>Register</h3>
@@ -68,12 +69,13 @@
             </p>
         </form>
     </div>
-    {{#extend "scripts"}}
-        <script>
-            $('#email').change(function () { $.getJSON('/api/auth/verify-email/' + $(this).val(), function (data) { if
-            (data) { $('#existed-email').hide(); $('#valid-email').show(); $('#register-button').attr('disabled', false)
-            } else { $('#existed-email').show(); $('#valid-email').hide(); $('#register-button').attr('disabled', true)
-            } }); });
-        </script>
-    {{/extend}}
-</body>
+</div>
+{{#extend "scripts"}}
+    <script>
+        $('#email').change(function () { $.getJSON('/api/auth/verify-email/' + $(this).val(), function (data) { if
+        (data) { $('#existed-email').hide(); $('#valid-email').show(); $('#register-button').attr('disabled', false) }
+        else { $('#existed-email').show(); $('#valid-email').hide(); $('#register-button').attr('disabled', true) } });
+        });
+    </script>
+{{/extend}}
+{{! </body> }}
