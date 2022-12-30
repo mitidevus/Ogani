@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
 const accountRepository = require('./accountRepository');
 
-exports.updateProfile = async (id, fullname, address) => {
-    return await accountRepository.updateProfile(id, fullname, address);
+exports.updateProfile = async (id, fullname, address, avatar) => {
+    return await accountRepository.updateProfile(id, fullname, address, avatar);
 };
 
 exports.getAccountInfoById = async (userId) => {

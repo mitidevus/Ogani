@@ -1,7 +1,7 @@
 const db = require('../../db');
 
-exports.updateProfile = async (id, fullname, address) => {
-    await db.connection.execute('update user set fullname = ?, address = ? where user_Id = ?', [fullname, address, id]);
+exports.updateProfile = async (id, fullname, address, avatar) => {
+    await db.connection.execute('update user set fullname = ?, address = ?, avatar = ? where user_Id = ?', [fullname, address, avatar, id]);
 };
 
 exports.getAccountInfoById = async (userId) => {
