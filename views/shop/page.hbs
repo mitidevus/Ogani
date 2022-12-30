@@ -324,14 +324,17 @@
 
 
     let categories= document.getElementsByClassName("currentCategory")
-    let preCate= categories[0];
+    let preCate;//= categories[0];
     {{!-- preCate.classList.add("is_acctive") --}}
     for (let cate of categories){
         cate.addEventListener('click', (e)=>{
             e.preventDefault()
             e.target.classList.add("is_acctive")
-            preCate.classList.remove("is_acctive")
+            if (preCate){
+                preCate.classList.remove("is_acctive") 
+            }
             preCate= cate
+            
         })
     }
 </script>
