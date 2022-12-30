@@ -51,8 +51,8 @@ exports.shop = async (req, res) => {
     else listProducts.sort((a, b) => b.rate_star - a.rate_star);
   }
   const sumPage = listProducts.total_page;
-  for (let i = 0; i < listProducts.length; i++) {
-    listProducts[i].price = listProducts[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  for (let i = 0; i < listProducts.data.length; i++) {
+    listProducts.data[i].price = listProducts.data[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
   }
 
   let listCategory = await shopService.getAllCategory();
@@ -60,8 +60,8 @@ exports.shop = async (req, res) => {
   let latestProduct = await shopService.getSortedProductByRelease_Date_Latest();
   latestProduct = latestProduct.slice(0, 5);
 
-  for (let i = 0; i < latestProduct.length; i++) {
-    latestProduct[i].price = latestProduct[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  for (let i = 0; i < listProducts.data.length; i++) {
+    listProducts.data[i].price = listProducts.data[i].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
   }
 
   let listcurrentPage = currentPage;
