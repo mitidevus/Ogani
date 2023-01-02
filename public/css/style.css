@@ -3784,15 +3784,8 @@ li {
     word-wrap: normal, break-word;
 }
 
-.Register-style {
+.Register-style{
     margin-left: 30px;
-}
-
-.background-wrapper {
-    background-image: url(../img/auth/auth_background.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 .auth-wrapper {
@@ -3816,31 +3809,29 @@ li {
 .auth-error {
     background-color: #f87171;
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
     padding: 8px 16px;
-    margin-top: 12px;
 }
 
-.is_acctive {
+.is_acctive{
     background: #7fad39;
     color: white !important;
 }
 
-.wrapper-button {
+.wrapper-button{
     margin-left: 550px;
 }
 
 
 #minamounth {
-    margin-bottom: 30px;
+    margin-bottom: 30px ; 
     font-size: 1.3rem;
     border: 2px solid #28a745;
-
+    
 }
-
 #maxamounth {
-    margin-bottom: 30px;
+    margin-bottom: 30px ; 
     font-size: 1.3rem;
     border: 2px solid #28a745;
 }
@@ -3849,23 +3840,10 @@ input::placeholder {
     color: grey;
 }
 
-.auth-success {
-    background-color: #4daa57;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 8px 16px;
-    margin-top: 12px;
+.inputs {
+    width: 50px;
 }
 
-.Error__take_me_home_btn {
-    background-color: #4daa57;
-    border-color: #4daa57;
-    color: #fff;
-}
-
-.Error__take_me_home_btn:hover {
-    background-color: #218838;
-    border-color: #218838;
-    color: #fff;
+.primary-btn{
+    color: white;
 }

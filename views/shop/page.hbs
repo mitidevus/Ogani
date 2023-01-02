@@ -124,15 +124,12 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
-                           <br>
-                           <br>
-                           <br>
-                           <br>
-                        </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="d-flex justify-content-end align-items-center">
+                            <div class="filter__found">
                                 
                             </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            
                         </div>
                     </div>
                 </div>
@@ -145,7 +142,11 @@
                                     <img src="{{this.image}}" alt="image" />
                                 </a>
                                 <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li>
+                                        <a onclick="addToCart({{this.product_Id}})">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
@@ -159,8 +160,10 @@
                 </div>
                 <p id="total_page" style="display: none;">{{listProducts.total_page}}</p>
                 <div id="page_component" class="d-flex justify-content-center product__pagination">
+                    
                     {{!-- <a href="/shop{{url_link}}/page/{{listcurrentPage}}{{url_sort}}{{url_filter}}"
                         class="currentPage">{{listcurrentPage}}</a> --}}
+
                 </div>
                 
             </div>
@@ -173,19 +176,19 @@
     let total_page= document.getElementById("total_page").innerText
     let pageComponent = document.getElementById("page_component")
     
+
+
     let list_product= document.getElementById("list_product_shop")
     let preCateID=0;
     let preNameSearch='';
     let preSort='';
     let preMin=0;
     let preMax=0;
-    function load_product_page(page=1, cate_id=preCateID, name=preNameSearch, sort=preSort, min=preMin, max=preMax){
-        console.log(page, cate_id, typeof name)
-        
+
+    function load_product_page(page=1, cate_id=preCateID, name=preNameSearch, sort=preSort, min=preMin, max=preMax){                        
         let htmlListProduct=``
         $.getJSON(`/api/shop?page=${page}&cate_id=${cate_id||''}&name=${name||''}&sort=${sort||''}&min=${min||''}&max=${max||''}`, function (products) {
             const data= products.data.map(v=>{
-                v.price = v.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
                 return `
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
@@ -194,7 +197,11 @@
                                     <img src="${v.image}" alt="image" />
                                 </a>
                                 <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li>
+                                        <a onclick="addToCart(${v.product_Id})">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
@@ -335,6 +342,18 @@
             }
             preCate= cate
             
+        })
+    }
+
+    
+    function addToCart(product_Id){
+        let user_Id = {{user.user_Id}}
+        $.post(
+            "/cartCheckout", 
+            {user_Id: user_Id, product_Id: product_Id, quantity: 1}
+        )
+        .done(function(data){
+            alert("Add cart", data)
         })
     }
 </script>

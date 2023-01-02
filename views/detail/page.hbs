@@ -42,15 +42,9 @@
                     </div>
                     <div class="product__details__price">{{price}}</div>
                     <p>{{description}}</p>
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="primary-btn">ADD TO CARD</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    
+                    <a onclick="addToCart({{product_Id}})" class="primary-btn" style="cursor: pointer;">ADD TO CARD</a>
+                   
                     <ul>
                         <li><b>Remain amount</b> <span>{{remain_Amount}}</span></li>
                         <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
@@ -121,3 +115,16 @@
     </div>
 </section>
 <!-- Related Product Section End -->
+
+<script>
+    function addToCart(product_Id){
+        let user_Id = {{user.user_Id}}
+        $.post(
+            "/cartCheckout", 
+            {user_Id: user_Id, product_Id: product_Id, quantity: 1}
+        )
+        .done(function(data){
+            alert("Add cart complete", data)
+        })
+    }
+</script>

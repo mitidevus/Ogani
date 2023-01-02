@@ -25,14 +25,12 @@ exports.showEditProfile = async (req, res) => {
 };
 
 exports.editProfile = async (req, res) => {
-    const { id, fullname, address, avatar } = req.body;
+    const { id, fullname, address } = req.body;
     // console.log("id", id);
     // console.log("fullname", fullname);
     // console.log("address", address);
-    // console.log("avatar", avatar);
-    await accountService.updateProfile(id, fullname, address, avatar);
+    await accountService.updateProfile(id, fullname, address);
     req.session.passport.user.fullname = fullname;
-    req.session.passport.user.avatar = avatar;
     res.redirect(`/account/userInfo`);
 };
 
@@ -71,7 +69,7 @@ exports.changePassword = async (req, res) => {
 
         await accountService.updatePassword(id, newPassword);
 
-        res.redirect(`/account/userInfo`);
+        res.redirect(`/account/userInfo/${id}`);
     } catch (e) {
         console.log("error: ", e.message);
         res.render("account/change_password", { error: e.message });

@@ -7,12 +7,12 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async function verify
   if (user) {
     return cb(null, user);
   }
-  return cb(new Error('Incorrect email or password.'));
+  return cb(null, false);
 }));
 
 passport.serializeUser(function (user, cb) {
   process.nextTick(function () {
-    cb(null, { user_Id: user.user_Id, fullname: user.fullname, email: user.email, address: user.address , avatar: user.avatar});
+    cb(null, { user_Id: user.user_Id, fullname: user.fullname, email: user.email, address: user.address });
   });
 });
 

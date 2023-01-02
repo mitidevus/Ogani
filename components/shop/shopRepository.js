@@ -1,5 +1,5 @@
 const db = require('../../db');
-const {ITEM_PER_PAGE,ITEM_PER_PAGE_SHOP} = require("../../constant/index")
+const {ITEM_PER_PAGE, ITEM_PER_PAGE_SHOP} = require("../../constant/index")
 
 exports.countAllProducts = async () => {
     let count = await db.connection.execute(`select count(*) from product`);
