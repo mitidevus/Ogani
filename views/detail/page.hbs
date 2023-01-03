@@ -256,4 +256,25 @@
     function setIsActiveForPage(){
     }
 
+    let rating_btn = document.getElementById("post-rating");
+    rating_btn.addEventListener("click", function () {
+        let content = document.getElementById("review-content").value;
+        let productId = document.getElementById("product_Id").innerText;
+        let userId = document.getElementById("user_Id").innerText;
+        let data = {
+            userId: userId,
+            content: content,
+            productId: productId,
+        };
+        $.ajax({
+            url: "/api/detail",
+            type: "POST",
+            data: data,
+            success: function (result) {
+                console.log(result);
+                load_reviews_page(1)
+                document.getElementById("review-content").value = "";
+            },
+        });
+    });
 </script>

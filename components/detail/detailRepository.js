@@ -32,3 +32,9 @@ exports.getReviewByProductId = async (productId, page = 1) => {
     // //console.log(result[0])
     // return result[0];
 }
+
+exports.createReview = async (productId, userId, content) => {
+    const result = await db.connection.execute('insert into review (content, user_Id, product_Id) values (?, ?, ?)', [content, userId, productId]);
+    //console.log(result[0])
+    return result[0];
+}

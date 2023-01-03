@@ -16,3 +16,12 @@ exports.getReviewByProductId = async (req, res) => {
     reviews = await detailServive.getReviewByProductId(productId, parseInt(page));
     res.json(reviews);
 };
+
+exports.createReview = async (req, res, next) => {
+    const { userId, productId, content } = req.body;
+    if (!userId || !productId || !content) {
+        return next(createError(400, "Comment are required"));
+    }
+    const review = await detailServive.createReview(productId, userId, content);
+    res.status(201).json(review);
+}
