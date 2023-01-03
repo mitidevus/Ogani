@@ -31,6 +31,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
+                    <p id="product_Id" style="display: none;">{{product_Id}}</p>
                         <h3>{{name}}</h3>
                         <div class="product__details__rating">
                             <div>
@@ -88,33 +89,40 @@
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
+                                    <form>
                                     <div class="d-flex justify-content-center">
                                         <div class="shadow-0 border" style="background-color: #f0f2f5; width: 100%;">
                                             <div class="card-body p-4">
                                                 {{#if ../user}}
-                                                    <div class="form-outline mb-4">
-                                                        <label class="form-label" for="addANote">Comment</label>
-                                                        <input
-                                                            type="text"
-                                                            id="addANote"
-                                                            class="form-control"
-                                                            placeholder="Type comment..."
-                                                        />
-                                                    </div>
+                                                <p id="user_Id" style="display: none;">{{../user.user_Id}}</p>
+                                                
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="addANote">Comment</label>
+                                                    <input
+                                                        type="text"
+                                                        id="review-content"
+                                                        class="form-control mb-3"
+                                                        placeholder="Type comment..."
+                                                        required
+                                                    />
+                                                    <button type="button" class="btn primary-btn" name="post-rating"
+                                                        id="post-rating">Submit</button>
+                                                </div>
 
                                                 {{else}}
-                                                    <div class="alert alert-warning" role="alert">
-                                                        <h4 class="alert-heading">You need to login to comment!</h4>
-                                                        <p>
-                                                            <a href="/auth/login">Login</a>
-                                                            or
-                                                            <a href="/auth/register">Register</a>
-                                                            to comment
-                                                        </p>
-                                                    </div>
+                                                <div class="alert alert-warning" role="alert">
+                                                    <h4 class="alert-heading">You need to login to comment!</h4>
+                                                    <p>
+                                                        <a href="/auth/login">Login</a>
+                                                        or
+                                                        <a href="/auth/register">Register</a>
+                                                        to comment
+                                                    </p>
+                                                </div>
                                                 {{/if}}
 
-                                                {{#each ../reviews}}
+                                                <div id="list_reviews">
+                                                {{#each ../reviews.data}}
                                                     <div class="card mb-2">
                                                         <div class="card-body">
                                                             <div class="d-flex">
@@ -126,19 +134,25 @@
                                                                     class="rounded-circle"
                                                                 />
                                                                 <div class="ml-3">
-                                                                    <span
-                                                                        class="font-weight-bold"
-                                                                    >{{this.fullname}}</span>
+                                                                    <span class="font-weight-bold">{{this.fullname}}</span>
                                                                     <p class="">{{this.content}}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 {{/each}}
+                                                </div>
+                                                <p id="total_page" style="display: none;">{{../reviews.total_page}}</p>
+                                                    
+                                                <div class="row justify-content-center">
+                                                    <div id="page_reviews" class="d-flex justify-content-center product__pagination">
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                </form>
                             </div>
 
                         </div>
@@ -185,3 +199,61 @@
     </div>
 </section>
 <!-- Related Product Section End -->
+
+<script>
+    let productId = document.getElementById("product_Id").innerText;
+    let total_page = document.getElementById("total_page").innerText;
+    let page_reviews = document.getElementById("page_reviews");
+    let html = `<div>`;
+    for (let i = 1; i <= Number(total_page); i++) {
+        html += `<a href="" onclick="load_reviews_page(${i})" class="currentPage">${i}</a>`;
+    }
+   
+    html += `</div>`;
+    page_reviews.innerHTML = html;
+    let list_reviews = document.getElementById("list_reviews");
+    
+    function load_reviews_page(page=1) {
+        let htmlListReviews = ``;
+        $.getJSON(`/api/detail/` + productId + `?page=${page}`, function (reviews) {
+            const data = reviews.data.map(v => {
+                return `
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <img
+                                    src="${v.avatar}"
+                                    alt="avatar"
+                                    width="50"
+                                    height="50"
+                                    class="rounded-circle"
+                                />
+                                <div class="ml-3">
+                                    <span class="font-weight-bold">${v.fullname}</span>
+                                    <p class="">${v.content}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            })
+            htmlListReviews = data.join("");
+            list_reviews.innerHTML= htmlListReviews;
+        });
+    }
+    
+    let pages = document.getElementsByClassName("currentPage");
+    let prePage= pages[0];
+    prePage.classList.add("is_acctive");
+    for (let page of pages) {
+        page.addEventListener('click', (e)=>{
+            e.preventDefault();
+            e.target.classList.add("is_acctive");
+            prePage.classList.remove("is_acctive");
+            prePage = page;
+        });
+    }
+    function setIsActiveForPage(){
+    }
+
+</script>

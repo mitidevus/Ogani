@@ -7,7 +7,9 @@ exports.detail = async (req, res) => {
 
     const product = await detailService.getProductById(productId);
     const products = await detailService.getAllProduct();
-    const reviews = await detailService.getReviewByProductId(productId);
+
+    let page = req.query.page || 1;
+    const reviews = await detailService.getReviewByProductId(productId, page);
 
     let listProductRelated = [];
 
