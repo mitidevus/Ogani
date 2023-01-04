@@ -9,17 +9,18 @@ const hbs = require("hbs");
 const usersRouter = require("./routes/users");
 const homeRouter = require("./components/home");
 const shopRouter = require("./components/shop");
-const apiShopRouter = require('./components/shop/api');
+const apiShopRouter = require("./components/shop/api");
 const detailRouter = require("./components/detail");
 const blogRouter = require("./components/blog");
 const contactRouter = require("./components/contact");
 const cartCheckoutRouter = require("./components/cartCheckout");
 const accountRouter = require("./components/account");
 const authRouter = require("./components/auth");
-const authApiRouter = require('./components/auth/api');
+const authApiRouter = require("./components/auth/api");
 const passport = require("./components/auth/passport");
 const auth = require("./middlewares/auth");
-const homeApiController = require("./components/home/api")
+const homeApiController = require("./components/home/api");
+const detailApiController = require("./components/detail/api");
 const { SESSION_SECRET } = require("./config/index.js");
 
 const app = express();
@@ -70,7 +71,6 @@ app.use(function (req, res, next) {
 app.use("/", homeRouter);
 app.use("/users", usersRouter);
 app.use("/shop", shopRouter);
-app.use('/api/shop', apiShopRouter);
 app.use("/detail", detailRouter);
 app.use("/blog", blogRouter);
 app.use("/contact", contactRouter);
@@ -79,8 +79,10 @@ app.use("/account", auth, accountRouter);
 app.use("/auth", authRouter);
 
 // API
-app.use('/api/auth', authApiRouter);
-app.use("/api/home", homeApiController)
+app.use("/api/shop", apiShopRouter);
+app.use("/api/auth", authApiRouter);
+app.use("/api/home", homeApiController);
+app.use("/api/detail", detailApiController);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

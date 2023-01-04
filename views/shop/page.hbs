@@ -186,6 +186,7 @@
         let htmlListProduct=``
         $.getJSON(`/api/shop?page=${page}&cate_id=${cate_id||''}&name=${name||''}&sort=${sort||''}&min=${min||''}&max=${max||''}`, function (products) {
             const data= products.data.map(v=>{
+                v.price = v.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
                 return `
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
@@ -291,7 +292,7 @@
     })
     function renderPage(total_page=1, cate_id=0, name, sort, min, max){
         let pagingHtml= ``
-        for (let i=1; i<= Number(total_page); i++){
+        for (let i=1; i <= Number(total_page); i++){
             pagingHtml+= `
                 <a href=""
             class="currentPage" onclick="load_product_page(${i}, ${cate_id}, '${name||''}', '${sort||''}', ${min}, ${max})">${i}</a>

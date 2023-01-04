@@ -4,7 +4,6 @@ const router = express.Router();
 const shopController = require('./shopController');
 
 router.get('/', shopController.shop);
-router.get('/', shopController.shop);
 
 
 // router.get('/page/:page/sort/:filter', shopController.shop);
