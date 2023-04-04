@@ -41,7 +41,6 @@ exports.getProductByCategory = async (page, cate_Id) => {
 
 
 exports.getAllCategory = async () => {
-    
     const result = await db.connection.execute('select * from category');
     return result[0];
 }
@@ -53,9 +52,6 @@ exports.getSortedProductByPrice_ASC = async (page, cate_Id, nameFilter, min, max
     let sqlData = "select * from Product"
     let data;
     let count;
-    console.log("name repo: ", nameFilter);
-    console.log("cate repo: ", cate_Id);
-    console.log("SQL: ", `${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and": "") +" category_Id="+cate_Id: ""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} order by price  limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);
     count = await db.connection.execute(`${sqlCount} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and": "") +" category_Id="+cate_Id:""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} `);    
     data = await db.connection.execute(`${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and": "") +" category_Id="+cate_Id: ""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} order by price  limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);    
     count=count[0][0]['count(*)']
@@ -79,9 +75,6 @@ exports.getSortedProductByPrice_DESC = async (page, cate_Id, nameFilter, min, ma
     let sqlData = "select * from Product"
     let data;
     let count;
-    console.log("name repo: ", nameFilter);
-    console.log("cate repo: ", cate_Id);
-    console.log("SQL: ", `${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and": "") +" category_Id="+cate_Id: ""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} order by price desc limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);
     count = await db.connection.execute(`${sqlCount} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and": "") +" category_Id="+cate_Id:""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""}`);    
     data = await db.connection.execute(`${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and": "") +" category_Id="+cate_Id: ""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} order by price desc limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);    
     count=count[0][0]['count(*)']
@@ -104,9 +97,6 @@ exports.getSortedProductByRate_Star_ASC = async (page,cate_Id,nameFilter, min, m
     let sqlData = "select * from Product"
     let data;
     let count;
-    console.log("name repo: ", nameFilter);
-    console.log("cate repo: ", cate_Id);
-    console.log("SQL: ", `${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?" and ": "")+" category_Id="+cate_Id: ""}  ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} order by rate_star  limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);
     count = await db.connection.execute(`${sqlCount} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?" and ": "")+" category_Id="+cate_Id:""}  ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""}`);    
     data = await db.connection.execute(`${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?" and ": "")+" category_Id="+cate_Id: ""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""}  order by rate_star  limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);    
     count=count[0][0]['count(*)']
@@ -129,9 +119,6 @@ exports.getSortedProductByRate_Star_DESC = async (page,cate_Id,nameFilter, min, 
     let sqlData = "select * from Product"
     let data;
     let count;
-    console.log("name repo: ", nameFilter);
-    console.log("cate repo: ", cate_Id);
-    console.log("SQL: ", `${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?" and ": "")+" category_Id="+cate_Id: ""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} order by rate_star desc  limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);
     count = await db.connection.execute(`${sqlCount} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?" and ": "")+" category_Id="+cate_Id:""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""}`);    
     data = await db.connection.execute(`${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?" and ": "")+" category_Id="+cate_Id: ""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} order by rate_star desc limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);    
     count=count[0][0]['count(*)']
@@ -156,9 +143,6 @@ exports.filter = async (page=1, cate_Id=0, nameFilter, min, max) => {
     let sqlData = "select * from Product"
     let data;
     let count;
-    console.log("name repo: ", nameFilter);
-    console.log("cate repo: ", cate_Id);
-    console.log("SQL filter method: ", `${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and":"")+" category_Id="+cate_Id: ""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""}  limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);
     count = await db.connection.execute(`${sqlCount} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and":"")+" category_Id="+cate_Id:""} ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} `);    
     data = await db.connection.execute(`${sqlData} ${(nameFilter||cate_Id || min)?" where ":""} ${nameFilter?" name LIKE '%"+nameFilter+"%' ":""} ${cate_Id? (nameFilter?"and":"")+" category_Id="+cate_Id: "" } ${min?((nameFilter||cate_Id)?" and ": "")+ "price between "+min+" and " + max: ""} limit ${ITEM_PER_PAGE_SHOP} offset ${(Number(page)-1)*ITEM_PER_PAGE_SHOP}`);    
     count=count[0][0]['count(*)']
@@ -168,11 +152,6 @@ exports.filter = async (page=1, cate_Id=0, nameFilter, min, max) => {
         total_page: Math.ceil(count/+ITEM_PER_PAGE_SHOP) ,
         item_per_page: ITEM_PER_PAGE_SHOP
     }
-    console.log({
-        page: page,
-        total_page: Math.ceil(count/+ITEM_PER_PAGE_SHOP),
-        item_per_page: ITEM_PER_PAGE_SHOP
-    });
 
     return result;
     
